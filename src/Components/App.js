@@ -7,6 +7,8 @@ import Filter from "./Filter/Filter";
 
 import styles from "./App.module.css";
 import logoAppear from "./Animation/LogoAppear.module.css";
+import Alert from "./Alert/Alert";
+import AlertAnimation from "./Animation/Alert.module.css";
 
 class App extends Component {
   state = {
@@ -19,6 +21,8 @@ class App extends Component {
     filter: "",
     name: "",
     number: "",
+    alert: false,
+    nameAlert: "",
   };
 
   changeFilter = (filter) => {
@@ -37,8 +41,13 @@ class App extends Component {
     const { name, number } = contact;
     const { contacts } = this.state;
 
+    if (name === "" || number === "") {
+      return;
+    }
+
     if (contacts.findIndex((contact) => contact.name === name) !== -1) {
-      alert(`${name} is already in contacts`);
+      // alert(`${name} is already in contacts`);
+      this.setState({ alert: true, nameAlert: name });
       return;
     }
 
@@ -64,16 +73,25 @@ class App extends Component {
   };
 
   render() {
-    const { contacts, filter } = this.state;
+    const { contacts, filter, alert, nameAlert } = this.state;
     const visibleContact = this.getVisiblecontacts();
 
     return (
-      <>
+      <div className={styles.formBlock}>
+        <CSSTransition
+          in={alert}
+          timeout={250}
+          classNames={AlertAnimation}
+          unmountOnExit
+        >
+          <Alert nameAlert={nameAlert} />
+        </CSSTransition>
         <CSSTransition
           in={true}
           appear={true}
           classNames={logoAppear}
           timeout={500}
+          unmountOnExit
         >
           <h1 className={styles.logo}>Phonebook</h1>
         </CSSTransition>
@@ -88,7 +106,7 @@ class App extends Component {
           contacts={visibleContact}
           onRemoveContact={this.removeContact}
         />
-      </>
+      </div>
     );
   }
 }

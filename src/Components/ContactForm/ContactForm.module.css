@@ -1,0 +1,32 @@
+.form {
+  border: 1px solid #eee;
+  border-radius: 4px;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 10px 15px;
+  box-shadow: 1px 1px 7px 0 rgba(0, 0, 0, 0.15);
+}
+
+input {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  height: 40px;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+input:focus,
+input:active {
+  outline-color: #3645ab;
+}
+
+.btnAdd {
+  background: #3645ab;
+  color: #fff;
+  width: 100%;
+  padding: 12px;
+  border: 0;
+  cursor: pointer;
+  font-weight: 600;
+}

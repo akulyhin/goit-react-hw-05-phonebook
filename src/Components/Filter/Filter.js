@@ -1,8 +1,9 @@
 import React from "react";
+import styles from "./Filter.module.css";
 
 export default function Filter({ value, onChangeFilter }) {
   return (
-    <div>
+    <div className={styles.form}>
       <label htmlFor="filter">Find contacts by name</label>
       <br />
       <input
